@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.trainingsystem.Dao.ShiftworkMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Shiftwork" >
+    <id column="shiftworkid" property="shiftworkid" jdbcType="INTEGER" />
+    <result column="sno" property="sno" jdbcType="VARCHAR" />
+    <result column="shiftdate" property="shiftdate" jdbcType="TIMESTAMP" />
+    <result column="currentclass" property="currentclass" jdbcType="VARCHAR" />
+    <result column="classaftershift" property="classaftershift" jdbcType="VARCHAR" />
+    <result column="shiftworkremarks" property="shiftworkremarks" jdbcType="VARCHAR" />
+    <result column="enclosure" property="enclosure" jdbcType="VARCHAR" />
+    <result column="remainingtime" property="remainingtime" jdbcType="TIMESTAMP" />
+    <result column="issendemail" property="issendemail" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="createpersonnerid" property="createpersonnerid" jdbcType="INTEGER" />
+    <result column="updatepersonnerid" property="updatepersonnerid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shiftworkid, sno, shiftdate, currentclass, classaftershift, shiftworkremarks, enclosure, 
+    remainingtime, issendemail, createtime, updatetime, createpersonnerid, updatepersonnerid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.ShiftworkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shiftwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shiftwork
+    where shiftworkid = #{shiftworkid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shiftwork
+    where shiftworkid = #{shiftworkid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.ShiftworkExample" >
+    delete from shiftwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Shiftwork" >
+    insert into shiftwork (shiftworkid, sno, shiftdate, 
+      currentclass, classaftershift, shiftworkremarks, 
+      enclosure, remainingtime, issendemail, 
+      createtime, updatetime, createpersonnerid, 
+      updatepersonnerid)
+    values (#{shiftworkid,jdbcType=INTEGER}, #{sno,jdbcType=VARCHAR}, #{shiftdate,jdbcType=TIMESTAMP}, 
+      #{currentclass,jdbcType=VARCHAR}, #{classaftershift,jdbcType=VARCHAR}, #{shiftworkremarks,jdbcType=VARCHAR}, 
+      #{enclosure,jdbcType=VARCHAR}, #{remainingtime,jdbcType=TIMESTAMP}, #{issendemail,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{createpersonnerid,jdbcType=INTEGER}, 
+      #{updatepersonnerid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Shiftwork" >
+    insert into shiftwork
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shiftworkid != null" >
+        shiftworkid,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="shiftdate != null" >
+        shiftdate,
+      </if>
+      <if test="currentclass != null" >
+        currentclass,
+      </if>
+      <if test="classaftershift != null" >
+        classaftershift,
+      </if>
+      <if test="shiftworkremarks != null" >
+        shiftworkremarks,
+      </if>
+      <if test="enclosure != null" >
+        enclosure,
+      </if>
+      <if test="remainingtime != null" >
+        remainingtime,
+      </if>
+      <if test="issendemail != null" >
+        issendemail,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="createpersonnerid != null" >
+        createpersonnerid,
+      </if>
+      <if test="updatepersonnerid != null" >
+        updatepersonnerid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shiftworkid != null" >
+        #{shiftworkid,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="shiftdate != null" >
+        #{shiftdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentclass != null" >
+        #{currentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="classaftershift != null" >
+        #{classaftershift,jdbcType=VARCHAR},
+      </if>
+      <if test="shiftworkremarks != null" >
+        #{shiftworkremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="remainingtime != null" >
+        #{remainingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issendemail != null" >
+        #{issendemail,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createpersonnerid != null" >
+        #{createpersonnerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatepersonnerid != null" >
+        #{updatepersonnerid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.ShiftworkExample" resultType="java.lang.Integer" >
+    select count(*) from shiftwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shiftwork
+    <set >
+      <if test="record.shiftworkid != null" >
+        shiftworkid = #{record.shiftworkid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shiftdate != null" >
+        shiftdate = #{record.shiftdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.currentclass != null" >
+        currentclass = #{record.currentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classaftershift != null" >
+        classaftershift = #{record.classaftershift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shiftworkremarks != null" >
+        shiftworkremarks = #{record.shiftworkremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enclosure != null" >
+        enclosure = #{record.enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remainingtime != null" >
+        remainingtime = #{record.remainingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.issendemail != null" >
+        issendemail = #{record.issendemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createpersonnerid != null" >
+        createpersonnerid = #{record.createpersonnerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatepersonnerid != null" >
+        updatepersonnerid = #{record.updatepersonnerid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shiftwork
+    set shiftworkid = #{record.shiftworkid,jdbcType=INTEGER},
+      sno = #{record.sno,jdbcType=VARCHAR},
+      shiftdate = #{record.shiftdate,jdbcType=TIMESTAMP},
+      currentclass = #{record.currentclass,jdbcType=VARCHAR},
+      classaftershift = #{record.classaftershift,jdbcType=VARCHAR},
+      shiftworkremarks = #{record.shiftworkremarks,jdbcType=VARCHAR},
+      enclosure = #{record.enclosure,jdbcType=VARCHAR},
+      remainingtime = #{record.remainingtime,jdbcType=TIMESTAMP},
+      issendemail = #{record.issendemail,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      createpersonnerid = #{record.createpersonnerid,jdbcType=INTEGER},
+      updatepersonnerid = #{record.updatepersonnerid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Shiftwork" >
+    update shiftwork
+    <set >
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="shiftdate != null" >
+        shiftdate = #{shiftdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentclass != null" >
+        currentclass = #{currentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="classaftershift != null" >
+        classaftershift = #{classaftershift,jdbcType=VARCHAR},
+      </if>
+      <if test="shiftworkremarks != null" >
+        shiftworkremarks = #{shiftworkremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null" >
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="remainingtime != null" >
+        remainingtime = #{remainingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issendemail != null" >
+        issendemail = #{issendemail,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createpersonnerid != null" >
+        createpersonnerid = #{createpersonnerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatepersonnerid != null" >
+        updatepersonnerid = #{updatepersonnerid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shiftworkid = #{shiftworkid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Shiftwork" >
+    update shiftwork
+    set sno = #{sno,jdbcType=VARCHAR},
+      shiftdate = #{shiftdate,jdbcType=TIMESTAMP},
+      currentclass = #{currentclass,jdbcType=VARCHAR},
+      classaftershift = #{classaftershift,jdbcType=VARCHAR},
+      shiftworkremarks = #{shiftworkremarks,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      remainingtime = #{remainingtime,jdbcType=TIMESTAMP},
+      issendemail = #{issendemail,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      createpersonnerid = #{createpersonnerid,jdbcType=INTEGER},
+      updatepersonnerid = #{updatepersonnerid,jdbcType=INTEGER}
+    where shiftworkid = #{shiftworkid,jdbcType=INTEGER}
+  </update>
+</mapper>

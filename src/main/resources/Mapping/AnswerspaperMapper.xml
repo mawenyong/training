@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.trainingsystem.Dao.AnswerspaperMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Answerspaper" >
+    <id column="answerspaperid" property="answerspaperid" jdbcType="INTEGER" />
+    <result column="answerid" property="answerid" jdbcType="INTEGER" />
+    <result column="examinationpapersid" property="examinationpapersid" jdbcType="INTEGER" />
+    <result column="iscorrect" property="iscorrect" jdbcType="CHAR" />
+    <result column="AnswerResults" property="answerresults" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    answerspaperid, answerid, examinationpapersid, iscorrect, AnswerResults
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.AnswerspaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from answerspaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from answerspaper
+    where answerspaperid = #{answerspaperid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answerspaper
+    where answerspaperid = #{answerspaperid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.AnswerspaperExample" >
+    delete from answerspaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Answerspaper" >
+    insert into answerspaper (answerspaperid, answerid, examinationpapersid, 
+      iscorrect, AnswerResults)
+    values (#{answerspaperid,jdbcType=INTEGER}, #{answerid,jdbcType=INTEGER}, #{examinationpapersid,jdbcType=INTEGER}, 
+      #{iscorrect,jdbcType=CHAR}, #{answerresults,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Answerspaper" >
+    insert into answerspaper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerspaperid != null" >
+        answerspaperid,
+      </if>
+      <if test="answerid != null" >
+        answerid,
+      </if>
+      <if test="examinationpapersid != null" >
+        examinationpapersid,
+      </if>
+      <if test="iscorrect != null" >
+        iscorrect,
+      </if>
+      <if test="answerresults != null" >
+        AnswerResults,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerspaperid != null" >
+        #{answerspaperid,jdbcType=INTEGER},
+      </if>
+      <if test="answerid != null" >
+        #{answerid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationpapersid != null" >
+        #{examinationpapersid,jdbcType=INTEGER},
+      </if>
+      <if test="iscorrect != null" >
+        #{iscorrect,jdbcType=CHAR},
+      </if>
+      <if test="answerresults != null" >
+        #{answerresults,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.AnswerspaperExample" resultType="java.lang.Integer" >
+    select count(*) from answerspaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update answerspaper
+    <set >
+      <if test="record.answerspaperid != null" >
+        answerspaperid = #{record.answerspaperid,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerid != null" >
+        answerid = #{record.answerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationpapersid != null" >
+        examinationpapersid = #{record.examinationpapersid,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscorrect != null" >
+        iscorrect = #{record.iscorrect,jdbcType=CHAR},
+      </if>
+      <if test="record.answerresults != null" >
+        AnswerResults = #{record.answerresults,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update answerspaper
+    set answerspaperid = #{record.answerspaperid,jdbcType=INTEGER},
+      answerid = #{record.answerid,jdbcType=INTEGER},
+      examinationpapersid = #{record.examinationpapersid,jdbcType=INTEGER},
+      iscorrect = #{record.iscorrect,jdbcType=CHAR},
+      AnswerResults = #{record.answerresults,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Answerspaper" >
+    update answerspaper
+    <set >
+      <if test="answerid != null" >
+        answerid = #{answerid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationpapersid != null" >
+        examinationpapersid = #{examinationpapersid,jdbcType=INTEGER},
+      </if>
+      <if test="iscorrect != null" >
+        iscorrect = #{iscorrect,jdbcType=CHAR},
+      </if>
+      <if test="answerresults != null" >
+        AnswerResults = #{answerresults,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where answerspaperid = #{answerspaperid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Answerspaper" >
+    update answerspaper
+    set answerid = #{answerid,jdbcType=INTEGER},
+      examinationpapersid = #{examinationpapersid,jdbcType=INTEGER},
+      iscorrect = #{iscorrect,jdbcType=CHAR},
+      AnswerResults = #{answerresults,jdbcType=VARCHAR}
+    where answerspaperid = #{answerspaperid,jdbcType=INTEGER}
+  </update>
+</mapper>

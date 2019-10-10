@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.trainingsystem.Dao.ItembankMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Itembank" >
+    <id column="itembankid" property="itembankid" jdbcType="INTEGER" />
+    <result column="typequestionsid" property="typequestionsid" jdbcType="INTEGER" />
+    <result column="topictypes" property="topictypes" jdbcType="CHAR" />
+    <result column="questioncontent" property="questioncontent" jdbcType="VARCHAR" />
+    <result column="testscores" property="testscores" jdbcType="VARCHAR" />
+    <result column="questionanswers" property="questionanswers" jdbcType="VARCHAR" />
+    <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="releasedate" property="releasedate" jdbcType="TIMESTAMP" />
+    <result column="isrelease" property="isrelease" jdbcType="CHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    itembankid, typequestionsid, topictypes, questioncontent, testscores, questionanswers, 
+    personnelid, createdate, updatedate, releasedate, isrelease, remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.ItembankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from itembank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from itembank
+    where itembankid = #{itembankid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from itembank
+    where itembankid = #{itembankid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.ItembankExample" >
+    delete from itembank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Itembank" >
+    insert into itembank (itembankid, typequestionsid, topictypes, 
+      questioncontent, testscores, questionanswers, 
+      personnelid, createdate, updatedate, 
+      releasedate, isrelease, remarks
+      )
+    values (#{itembankid,jdbcType=INTEGER}, #{typequestionsid,jdbcType=INTEGER}, #{topictypes,jdbcType=CHAR}, 
+      #{questioncontent,jdbcType=VARCHAR}, #{testscores,jdbcType=VARCHAR}, #{questionanswers,jdbcType=VARCHAR}, 
+      #{personnelid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP}, 
+      #{releasedate,jdbcType=TIMESTAMP}, #{isrelease,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Itembank" >
+    insert into itembank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itembankid != null" >
+        itembankid,
+      </if>
+      <if test="typequestionsid != null" >
+        typequestionsid,
+      </if>
+      <if test="topictypes != null" >
+        topictypes,
+      </if>
+      <if test="questioncontent != null" >
+        questioncontent,
+      </if>
+      <if test="testscores != null" >
+        testscores,
+      </if>
+      <if test="questionanswers != null" >
+        questionanswers,
+      </if>
+      <if test="personnelid != null" >
+        personnelid,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="releasedate != null" >
+        releasedate,
+      </if>
+      <if test="isrelease != null" >
+        isrelease,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itembankid != null" >
+        #{itembankid,jdbcType=INTEGER},
+      </if>
+      <if test="typequestionsid != null" >
+        #{typequestionsid,jdbcType=INTEGER},
+      </if>
+      <if test="topictypes != null" >
+        #{topictypes,jdbcType=CHAR},
+      </if>
+      <if test="questioncontent != null" >
+        #{questioncontent,jdbcType=VARCHAR},
+      </if>
+      <if test="testscores != null" >
+        #{testscores,jdbcType=VARCHAR},
+      </if>
+      <if test="questionanswers != null" >
+        #{questionanswers,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelid != null" >
+        #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releasedate != null" >
+        #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrelease != null" >
+        #{isrelease,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.ItembankExample" resultType="java.lang.Integer" >
+    select count(*) from itembank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update itembank
+    <set >
+      <if test="record.itembankid != null" >
+        itembankid = #{record.itembankid,jdbcType=INTEGER},
+      </if>
+      <if test="record.typequestionsid != null" >
+        typequestionsid = #{record.typequestionsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.topictypes != null" >
+        topictypes = #{record.topictypes,jdbcType=CHAR},
+      </if>
+      <if test="record.questioncontent != null" >
+        questioncontent = #{record.questioncontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testscores != null" >
+        testscores = #{record.testscores,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionanswers != null" >
+        questionanswers = #{record.questionanswers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnelid != null" >
+        personnelid = #{record.personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releasedate != null" >
+        releasedate = #{record.releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isrelease != null" >
+        isrelease = #{record.isrelease,jdbcType=CHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update itembank
+    set itembankid = #{record.itembankid,jdbcType=INTEGER},
+      typequestionsid = #{record.typequestionsid,jdbcType=INTEGER},
+      topictypes = #{record.topictypes,jdbcType=CHAR},
+      questioncontent = #{record.questioncontent,jdbcType=VARCHAR},
+      testscores = #{record.testscores,jdbcType=VARCHAR},
+      questionanswers = #{record.questionanswers,jdbcType=VARCHAR},
+      personnelid = #{record.personnelid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      releasedate = #{record.releasedate,jdbcType=TIMESTAMP},
+      isrelease = #{record.isrelease,jdbcType=CHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Itembank" >
+    update itembank
+    <set >
+      <if test="typequestionsid != null" >
+        typequestionsid = #{typequestionsid,jdbcType=INTEGER},
+      </if>
+      <if test="topictypes != null" >
+        topictypes = #{topictypes,jdbcType=CHAR},
+      </if>
+      <if test="questioncontent != null" >
+        questioncontent = #{questioncontent,jdbcType=VARCHAR},
+      </if>
+      <if test="testscores != null" >
+        testscores = #{testscores,jdbcType=VARCHAR},
+      </if>
+      <if test="questionanswers != null" >
+        questionanswers = #{questionanswers,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelid != null" >
+        personnelid = #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releasedate != null" >
+        releasedate = #{releasedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrelease != null" >
+        isrelease = #{isrelease,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where itembankid = #{itembankid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Itembank" >
+    update itembank
+    set typequestionsid = #{typequestionsid,jdbcType=INTEGER},
+      topictypes = #{topictypes,jdbcType=CHAR},
+      questioncontent = #{questioncontent,jdbcType=VARCHAR},
+      testscores = #{testscores,jdbcType=VARCHAR},
+      questionanswers = #{questionanswers,jdbcType=VARCHAR},
+      personnelid = #{personnelid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      releasedate = #{releasedate,jdbcType=TIMESTAMP},
+      isrelease = #{isrelease,jdbcType=CHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where itembankid = #{itembankid,jdbcType=INTEGER}
+  </update>
+</mapper>

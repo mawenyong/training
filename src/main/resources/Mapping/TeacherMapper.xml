@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.trainingsystem.Dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Teacher" >
+    <id column="teacherid" property="teacherid" jdbcType="INTEGER" />
+    <result column="scopeofinstruction" property="scopeofinstruction" jdbcType="VARCHAR" />
+    <result column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="InitiationDate" property="initiationdate" jdbcType="DATE" />
+    <result column="personnelId" property="personnelid" jdbcType="INTEGER" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="resume" property="resume" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    teacherid, scopeofinstruction, tno, InitiationDate, personnelId, updatedate, resume
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacherid = #{teacherid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where teacherid = #{teacherid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.TeacherExample" >
+    delete from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Teacher" >
+    insert into teacher (teacherid, scopeofinstruction, tno, 
+      InitiationDate, personnelId, updatedate, 
+      resume)
+    values (#{teacherid,jdbcType=INTEGER}, #{scopeofinstruction,jdbcType=VARCHAR}, #{tno,jdbcType=VARCHAR}, 
+      #{initiationdate,jdbcType=DATE}, #{personnelid,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}, 
+      #{resume,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherid != null" >
+        teacherid,
+      </if>
+      <if test="scopeofinstruction != null" >
+        scopeofinstruction,
+      </if>
+      <if test="tno != null" >
+        tno,
+      </if>
+      <if test="initiationdate != null" >
+        InitiationDate,
+      </if>
+      <if test="personnelid != null" >
+        personnelId,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="resume != null" >
+        resume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="scopeofinstruction != null" >
+        #{scopeofinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="initiationdate != null" >
+        #{initiationdate,jdbcType=DATE},
+      </if>
+      <if test="personnelid != null" >
+        #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resume != null" >
+        #{resume,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update teacher
+    <set >
+      <if test="record.teacherid != null" >
+        teacherid = #{record.teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scopeofinstruction != null" >
+        scopeofinstruction = #{record.scopeofinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tno != null" >
+        tno = #{record.tno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initiationdate != null" >
+        InitiationDate = #{record.initiationdate,jdbcType=DATE},
+      </if>
+      <if test="record.personnelid != null" >
+        personnelId = #{record.personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resume != null" >
+        resume = #{record.resume,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update teacher
+    set teacherid = #{record.teacherid,jdbcType=INTEGER},
+      scopeofinstruction = #{record.scopeofinstruction,jdbcType=VARCHAR},
+      tno = #{record.tno,jdbcType=VARCHAR},
+      InitiationDate = #{record.initiationdate,jdbcType=DATE},
+      personnelId = #{record.personnelid,jdbcType=INTEGER},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      resume = #{record.resume,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Teacher" >
+    update teacher
+    <set >
+      <if test="scopeofinstruction != null" >
+        scopeofinstruction = #{scopeofinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        tno = #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="initiationdate != null" >
+        InitiationDate = #{initiationdate,jdbcType=DATE},
+      </if>
+      <if test="personnelid != null" >
+        personnelId = #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resume != null" >
+        resume = #{resume,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teacherid = #{teacherid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Teacher" >
+    update teacher
+    set scopeofinstruction = #{scopeofinstruction,jdbcType=VARCHAR},
+      tno = #{tno,jdbcType=VARCHAR},
+      InitiationDate = #{initiationdate,jdbcType=DATE},
+      personnelId = #{personnelid,jdbcType=INTEGER},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      resume = #{resume,jdbcType=VARCHAR}
+    where teacherid = #{teacherid,jdbcType=INTEGER}
+  </update>
+</mapper>
