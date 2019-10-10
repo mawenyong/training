@@ -1,8 +1,10 @@
 package com.ssm.trainingsystem.Model;
 
+import com.ssm.trainingsystem.tool.BasePage;
+
 import java.util.Date;
 
-public class Loginperson {
+public class Loginperson extends BasePage {
     private Integer loginpersonid;
 
     private String loginname;

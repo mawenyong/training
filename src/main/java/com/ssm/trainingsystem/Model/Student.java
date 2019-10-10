@@ -1,8 +1,10 @@
 package com.ssm.trainingsystem.Model;
 
+import com.ssm.trainingsystem.tool.BasePage;
+
 import java.util.Date;
 
-public class Student {
+public class Student extends BasePage {
     private Integer studentid;
 
     private String school;
