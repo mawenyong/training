@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Typequestions;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TypequestionsMapper {
     int deleteByPrimaryKey(Integer typequestionsid);
 

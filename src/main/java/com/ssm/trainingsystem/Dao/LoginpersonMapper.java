@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Loginperson;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface LoginpersonMapper {
     int deleteByPrimaryKey(Integer loginpersonid);
 

@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Answer;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AnswerMapper {
     int deleteByPrimaryKey(Integer answerid);
 

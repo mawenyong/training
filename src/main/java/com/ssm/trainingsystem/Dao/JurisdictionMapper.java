@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Jurisdiction;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface JurisdictionMapper {
     int deleteByPrimaryKey(Integer jurisdictionid);
 

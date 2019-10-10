@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Numberclass;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface NumberclassMapper {
     int deleteByPrimaryKey(Integer numberclassid);
 

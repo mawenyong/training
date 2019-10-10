@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Attendance;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AttendanceMapper {
     int deleteByPrimaryKey(Integer attendanceid);
 

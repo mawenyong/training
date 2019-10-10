@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Examinationpapers;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ExaminationpapersMapper {
     int deleteByPrimaryKey(Integer examinationpapersid);
 

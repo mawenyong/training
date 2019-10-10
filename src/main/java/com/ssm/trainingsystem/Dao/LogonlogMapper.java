@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Logonlog;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface LogonlogMapper {
     int deleteByPrimaryKey(Integer logid);
 

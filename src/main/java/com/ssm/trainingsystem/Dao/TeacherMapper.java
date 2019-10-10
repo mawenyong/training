@@ -1,7 +1,9 @@
 package com.ssm.trainingsystem.Dao;
 
 import com.ssm.trainingsystem.Model.Teacher;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TeacherMapper {
     int deleteByPrimaryKey(Integer teacherid);
 
