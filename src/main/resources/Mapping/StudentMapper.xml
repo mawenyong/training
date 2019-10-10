@@ -25,9 +25,6 @@
     from student
     where studentid = #{studentid,jdbcType=INTEGER}
   </select>
-  <select id="selectStudentNo" resultType="java.lang.Integer" parameterType="java.lang.String">
-      SELECT count(sno) as num from student where sno=#{sno,jdbcType=VARCHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
     where studentid = #{studentid,jdbcType=INTEGER}
