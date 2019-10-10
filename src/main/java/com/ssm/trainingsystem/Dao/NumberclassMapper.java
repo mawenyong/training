@@ -3,8 +3,10 @@ package com.ssm.trainingsystem.Dao;
 import com.ssm.trainingsystem.Model.Numberclass;
 import com.ssm.trainingsystem.Model.NumberclassExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface NumberclassMapper {
     int countByExample(NumberclassExample example);
 

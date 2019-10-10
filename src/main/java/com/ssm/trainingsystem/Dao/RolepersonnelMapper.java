@@ -3,8 +3,10 @@ package com.ssm.trainingsystem.Dao;
 import com.ssm.trainingsystem.Model.Rolepersonnel;
 import com.ssm.trainingsystem.Model.RolepersonnelExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface RolepersonnelMapper {
     int countByExample(RolepersonnelExample example);
 

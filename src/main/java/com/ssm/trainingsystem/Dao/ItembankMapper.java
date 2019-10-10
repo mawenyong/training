@@ -3,8 +3,10 @@ package com.ssm.trainingsystem.Dao;
 import com.ssm.trainingsystem.Model.Itembank;
 import com.ssm.trainingsystem.Model.ItembankExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ItembankMapper {
     int countByExample(ItembankExample example);
 

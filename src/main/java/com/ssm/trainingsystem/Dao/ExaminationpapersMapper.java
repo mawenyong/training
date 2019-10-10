@@ -3,8 +3,10 @@ package com.ssm.trainingsystem.Dao;
 import com.ssm.trainingsystem.Model.Examinationpapers;
 import com.ssm.trainingsystem.Model.ExaminationpapersExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ExaminationpapersMapper {
     int countByExample(ExaminationpapersExample example);
 
