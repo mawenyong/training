@@ -16,83 +16,10 @@
     <result column="submitdate" property="submitdate" jdbcType="TIMESTAMP" />
     <result column="totalscore" property="totalscore" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     answerid, answerspaperid, namePaper, personnelid, isqualified, begindate, enddate, 
     remarks, enddateofmarking, releasedate, issubmit, submitdate, totalscore
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.AnswerExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from answer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -102,12 +29,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from answer
     where answerid = #{answerid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.AnswerExample" >
-    delete from answer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Answer" >
     insert into answer (answerid, answerspaperid, namePaper, 
@@ -206,78 +127,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.AnswerExample" resultType="java.lang.Integer" >
-    select count(*) from answer
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update answer
-    <set >
-      <if test="record.answerid != null" >
-        answerid = #{record.answerid,jdbcType=INTEGER},
-      </if>
-      <if test="record.answerspaperid != null" >
-        answerspaperid = #{record.answerspaperid,jdbcType=INTEGER},
-      </if>
-      <if test="record.namepaper != null" >
-        namePaper = #{record.namepaper,jdbcType=VARCHAR},
-      </if>
-      <if test="record.personnelid != null" >
-        personnelid = #{record.personnelid,jdbcType=INTEGER},
-      </if>
-      <if test="record.isqualified != null" >
-        isqualified = #{record.isqualified,jdbcType=CHAR},
-      </if>
-      <if test="record.begindate != null" >
-        begindate = #{record.begindate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.enddate != null" >
-        enddate = #{record.enddate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.remarks != null" >
-        remarks = #{record.remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enddateofmarking != null" >
-        enddateofmarking = #{record.enddateofmarking,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.releasedate != null" >
-        releasedate = #{record.releasedate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.issubmit != null" >
-        issubmit = #{record.issubmit,jdbcType=CHAR},
-      </if>
-      <if test="record.submitdate != null" >
-        submitdate = #{record.submitdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.totalscore != null" >
-        totalscore = #{record.totalscore,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update answer
-    set answerid = #{record.answerid,jdbcType=INTEGER},
-      answerspaperid = #{record.answerspaperid,jdbcType=INTEGER},
-      namePaper = #{record.namepaper,jdbcType=VARCHAR},
-      personnelid = #{record.personnelid,jdbcType=INTEGER},
-      isqualified = #{record.isqualified,jdbcType=CHAR},
-      begindate = #{record.begindate,jdbcType=TIMESTAMP},
-      enddate = #{record.enddate,jdbcType=TIMESTAMP},
-      remarks = #{record.remarks,jdbcType=VARCHAR},
-      enddateofmarking = #{record.enddateofmarking,jdbcType=TIMESTAMP},
-      releasedate = #{record.releasedate,jdbcType=TIMESTAMP},
-      issubmit = #{record.issubmit,jdbcType=CHAR},
-      submitdate = #{record.submitdate,jdbcType=TIMESTAMP},
-      totalscore = #{record.totalscore,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Answer" >
     update answer
     <set >

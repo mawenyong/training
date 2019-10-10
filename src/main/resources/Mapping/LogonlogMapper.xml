@@ -7,82 +7,9 @@
     <result column="logaddress" property="logaddress" jdbcType="VARCHAR" />
     <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     logid, logdate, logaddress, personnelid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.LogonlogExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from logonlog
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -92,12 +19,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from logonlog
     where logid = #{logid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.LogonlogExample" >
-    delete from logonlog
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Logonlog" >
     insert into logonlog (logid, logdate, logaddress, 
@@ -136,42 +57,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.LogonlogExample" resultType="java.lang.Integer" >
-    select count(*) from logonlog
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update logonlog
-    <set >
-      <if test="record.logid != null" >
-        logid = #{record.logid,jdbcType=INTEGER},
-      </if>
-      <if test="record.logdate != null" >
-        logdate = #{record.logdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.logaddress != null" >
-        logaddress = #{record.logaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.personnelid != null" >
-        personnelid = #{record.personnelid,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update logonlog
-    set logid = #{record.logid,jdbcType=INTEGER},
-      logdate = #{record.logdate,jdbcType=TIMESTAMP},
-      logaddress = #{record.logaddress,jdbcType=VARCHAR},
-      personnelid = #{record.personnelid,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Logonlog" >
     update logonlog
     <set >

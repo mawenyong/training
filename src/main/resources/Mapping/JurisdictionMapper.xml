@@ -9,82 +9,9 @@
     <result column="modelname" property="modelname" jdbcType="VARCHAR" />
     <result column="parentjurisdictionid" property="parentjurisdictionid" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     jurisdictionid, interfacename, url, remarks, modelname, parentjurisdictionid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssm.trainingsystem.Model.JurisdictionExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from jurisdiction
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -94,12 +21,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jurisdiction
     where jurisdictionid = #{jurisdictionid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ssm.trainingsystem.Model.JurisdictionExample" >
-    delete from jurisdiction
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Jurisdiction" >
     insert into jurisdiction (jurisdictionid, interfacename, url, 
@@ -152,50 +73,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ssm.trainingsystem.Model.JurisdictionExample" resultType="java.lang.Integer" >
-    select count(*) from jurisdiction
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update jurisdiction
-    <set >
-      <if test="record.jurisdictionid != null" >
-        jurisdictionid = #{record.jurisdictionid,jdbcType=INTEGER},
-      </if>
-      <if test="record.interfacename != null" >
-        interfacename = #{record.interfacename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.url != null" >
-        url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remarks != null" >
-        remarks = #{record.remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.modelname != null" >
-        modelname = #{record.modelname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.parentjurisdictionid != null" >
-        parentjurisdictionid = #{record.parentjurisdictionid,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update jurisdiction
-    set jurisdictionid = #{record.jurisdictionid,jdbcType=INTEGER},
-      interfacename = #{record.interfacename,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR},
-      remarks = #{record.remarks,jdbcType=VARCHAR},
-      modelname = #{record.modelname,jdbcType=VARCHAR},
-      parentjurisdictionid = #{record.parentjurisdictionid,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Jurisdiction" >
     update jurisdiction
     <set >
