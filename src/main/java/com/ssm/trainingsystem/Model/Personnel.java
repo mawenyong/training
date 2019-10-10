@@ -37,6 +37,14 @@ public class Personnel {
 
     private String approvalstate;
 
+    private String teacherimage;
+
+    private Integer loginpersonid;
+
+    private String wechat;
+
+    private Integer qq;
+
     public Integer getPersonnelid() {
         return personnelid;
     }
@@ -171,5 +179,37 @@ public class Personnel {
 
     public void setApprovalstate(String approvalstate) {
         this.approvalstate = approvalstate == null ? null : approvalstate.trim();
+    }
+
+    public String getTeacherimage() {
+        return teacherimage;
+    }
+
+    public void setTeacherimage(String teacherimage) {
+        this.teacherimage = teacherimage == null ? null : teacherimage.trim();
+    }
+
+    public Integer getLoginpersonid() {
+        return loginpersonid;
+    }
+
+    public void setLoginpersonid(Integer loginpersonid) {
+        this.loginpersonid = loginpersonid;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat == null ? null : wechat.trim();
+    }
+
+    public Integer getQq() {
+        return qq;
+    }
+
+    public void setQq(Integer qq) {
+        this.qq = qq;
     }
 }
