@@ -3,6 +3,8 @@ package com.ssm.trainingsystem.Dao;
 import com.ssm.trainingsystem.Model.Attendance;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AttendanceMapper {
     int deleteByPrimaryKey(Integer attendanceid);
@@ -16,4 +18,8 @@ public interface AttendanceMapper {
     int updateByPrimaryKeySelective(Attendance record);
 
     int updateByPrimaryKey(Attendance record);
+
+    List<Attendance> selectAll(Attendance attendance);
+
+    Attendance selectOne(int attendanceid);
 }

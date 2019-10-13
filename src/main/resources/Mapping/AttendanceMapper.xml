@@ -18,6 +18,12 @@
     from attendance
     where AttendanceID = #{attendanceid,jdbcType=INTEGER}
   </select>
+    <select id="selectAll" resultType="com.ssm.trainingsystem.Model.Attendance" parameterType="com.ssm.trainingsystem.Model.Attendance">
+      SELECT <include refid="Base_Column_List"/> from attendance WHERE 1=1
+    </select>
+  <select id="selectOne" resultType="com.ssm.trainingsystem.Model.Attendance" parameterType="java.lang.Integer">
+      SELECT <include refid="Base_Column_List"/> from attendance WHERE AttendanceID = #{attendanceid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from attendance
     where AttendanceID = #{attendanceid,jdbcType=INTEGER}

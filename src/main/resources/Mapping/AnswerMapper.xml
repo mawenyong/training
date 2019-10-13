@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ssm.trainingsystem.Dao.AnswerMapper" >
-  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Answer" >
-    <id column="answerid" property="answerid" jdbcType="INTEGER" />
-    <result column="answerspaperid" property="answerspaperid" jdbcType="INTEGER" />
-    <result column="namePaper" property="namepaper" jdbcType="VARCHAR" />
-    <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
-    <result column="isqualified" property="isqualified" jdbcType="CHAR" />
-    <result column="begindate" property="begindate" jdbcType="TIMESTAMP" />
-    <result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
-    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="enddateofmarking" property="enddateofmarking" jdbcType="TIMESTAMP" />
-    <result column="releasedate" property="releasedate" jdbcType="TIMESTAMP" />
-    <result column="issubmit" property="issubmit" jdbcType="CHAR" />
-    <result column="submitdate" property="submitdate" jdbcType="TIMESTAMP" />
-    <result column="totalscore" property="totalscore" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ssm.trainingsystem.Dao.AnswerMapper">
+    <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Answer">
+        <id column="answerid" property="answerid" jdbcType="INTEGER"/>
+        <result column="answerspaperid" property="answerspaperid" jdbcType="INTEGER"/>
+        <result column="namePaper" property="namepaper" jdbcType="VARCHAR"/>
+        <result column="personnelid" property="personnelid" jdbcType="INTEGER"/>
+        <result column="isqualified" property="isqualified" jdbcType="CHAR"/>
+        <result column="begindate" property="begindate" jdbcType="TIMESTAMP"/>
+        <result column="enddate" property="enddate" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="enddateofmarking" property="enddateofmarking" jdbcType="TIMESTAMP"/>
+        <result column="releasedate" property="releasedate" jdbcType="TIMESTAMP"/>
+        <result column="issubmit" property="issubmit" jdbcType="CHAR"/>
+        <result column="submitdate" property="submitdate" jdbcType="TIMESTAMP"/>
+        <result column="totalscore" property="totalscore" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     answerid, answerspaperid, namePaper, personnelid, isqualified, begindate, enddate, 
     remarks, enddateofmarking, releasedate, issubmit, submitdate, totalscore
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from answer
-    where answerid = #{answerid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from answer
+        where answerid = #{answerid,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultType="com.ssm.trainingsystem.Model.Answer"
+            parameterType="com.ssm.trainingsystem.Model.Answer">
+        select
+        <include refid="Base_Column_List"/>
+        FROM answer WHERE 1=1
+    </select>
+    <select id="selectOne" resultType="com.ssm.trainingsystem.Model.Answer" parameterType="java.lang.Integer">
+        select <include refid="Base_Column_List"/> from answer WHERE answerid = #{answerid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from answer
     where answerid = #{answerid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Answer" >
+    <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Answer">
     insert into answer (answerid, answerspaperid, namePaper, 
       personnelid, isqualified, begindate, 
       enddate, remarks, enddateofmarking, 
@@ -42,134 +51,134 @@
       #{releasedate,jdbcType=TIMESTAMP}, #{issubmit,jdbcType=CHAR}, #{submitdate,jdbcType=TIMESTAMP}, 
       #{totalscore,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Answer" >
-    insert into answer
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="answerid != null" >
-        answerid,
-      </if>
-      <if test="answerspaperid != null" >
-        answerspaperid,
-      </if>
-      <if test="namepaper != null" >
-        namePaper,
-      </if>
-      <if test="personnelid != null" >
-        personnelid,
-      </if>
-      <if test="isqualified != null" >
-        isqualified,
-      </if>
-      <if test="begindate != null" >
-        begindate,
-      </if>
-      <if test="enddate != null" >
-        enddate,
-      </if>
-      <if test="remarks != null" >
-        remarks,
-      </if>
-      <if test="enddateofmarking != null" >
-        enddateofmarking,
-      </if>
-      <if test="releasedate != null" >
-        releasedate,
-      </if>
-      <if test="issubmit != null" >
-        issubmit,
-      </if>
-      <if test="submitdate != null" >
-        submitdate,
-      </if>
-      <if test="totalscore != null" >
-        totalscore,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="answerid != null" >
-        #{answerid,jdbcType=INTEGER},
-      </if>
-      <if test="answerspaperid != null" >
-        #{answerspaperid,jdbcType=INTEGER},
-      </if>
-      <if test="namepaper != null" >
-        #{namepaper,jdbcType=VARCHAR},
-      </if>
-      <if test="personnelid != null" >
-        #{personnelid,jdbcType=INTEGER},
-      </if>
-      <if test="isqualified != null" >
-        #{isqualified,jdbcType=CHAR},
-      </if>
-      <if test="begindate != null" >
-        #{begindate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enddate != null" >
-        #{enddate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remarks != null" >
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="enddateofmarking != null" >
-        #{enddateofmarking,jdbcType=TIMESTAMP},
-      </if>
-      <if test="releasedate != null" >
-        #{releasedate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="issubmit != null" >
-        #{issubmit,jdbcType=CHAR},
-      </if>
-      <if test="submitdate != null" >
-        #{submitdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="totalscore != null" >
-        #{totalscore,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Answer" >
-    update answer
-    <set >
-      <if test="answerspaperid != null" >
-        answerspaperid = #{answerspaperid,jdbcType=INTEGER},
-      </if>
-      <if test="namepaper != null" >
-        namePaper = #{namepaper,jdbcType=VARCHAR},
-      </if>
-      <if test="personnelid != null" >
-        personnelid = #{personnelid,jdbcType=INTEGER},
-      </if>
-      <if test="isqualified != null" >
-        isqualified = #{isqualified,jdbcType=CHAR},
-      </if>
-      <if test="begindate != null" >
-        begindate = #{begindate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enddate != null" >
-        enddate = #{enddate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remarks != null" >
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="enddateofmarking != null" >
-        enddateofmarking = #{enddateofmarking,jdbcType=TIMESTAMP},
-      </if>
-      <if test="releasedate != null" >
-        releasedate = #{releasedate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="issubmit != null" >
-        issubmit = #{issubmit,jdbcType=CHAR},
-      </if>
-      <if test="submitdate != null" >
-        submitdate = #{submitdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="totalscore != null" >
-        totalscore = #{totalscore,jdbcType=INTEGER},
-      </if>
-    </set>
-    where answerid = #{answerid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Answer" >
+    <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Answer">
+        insert into answer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="answerid != null">
+                answerid,
+            </if>
+            <if test="answerspaperid != null">
+                answerspaperid,
+            </if>
+            <if test="namepaper != null">
+                namePaper,
+            </if>
+            <if test="personnelid != null">
+                personnelid,
+            </if>
+            <if test="isqualified != null">
+                isqualified,
+            </if>
+            <if test="begindate != null">
+                begindate,
+            </if>
+            <if test="enddate != null">
+                enddate,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="enddateofmarking != null">
+                enddateofmarking,
+            </if>
+            <if test="releasedate != null">
+                releasedate,
+            </if>
+            <if test="issubmit != null">
+                issubmit,
+            </if>
+            <if test="submitdate != null">
+                submitdate,
+            </if>
+            <if test="totalscore != null">
+                totalscore,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="answerid != null">
+                #{answerid,jdbcType=INTEGER},
+            </if>
+            <if test="answerspaperid != null">
+                #{answerspaperid,jdbcType=INTEGER},
+            </if>
+            <if test="namepaper != null">
+                #{namepaper,jdbcType=VARCHAR},
+            </if>
+            <if test="personnelid != null">
+                #{personnelid,jdbcType=INTEGER},
+            </if>
+            <if test="isqualified != null">
+                #{isqualified,jdbcType=CHAR},
+            </if>
+            <if test="begindate != null">
+                #{begindate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enddate != null">
+                #{enddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="enddateofmarking != null">
+                #{enddateofmarking,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releasedate != null">
+                #{releasedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="issubmit != null">
+                #{issubmit,jdbcType=CHAR},
+            </if>
+            <if test="submitdate != null">
+                #{submitdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalscore != null">
+                #{totalscore,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Answer">
+        update answer
+        <set>
+            <if test="answerspaperid != null">
+                answerspaperid = #{answerspaperid,jdbcType=INTEGER},
+            </if>
+            <if test="namepaper != null">
+                namePaper = #{namepaper,jdbcType=VARCHAR},
+            </if>
+            <if test="personnelid != null">
+                personnelid = #{personnelid,jdbcType=INTEGER},
+            </if>
+            <if test="isqualified != null">
+                isqualified = #{isqualified,jdbcType=CHAR},
+            </if>
+            <if test="begindate != null">
+                begindate = #{begindate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enddate != null">
+                enddate = #{enddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="enddateofmarking != null">
+                enddateofmarking = #{enddateofmarking,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releasedate != null">
+                releasedate = #{releasedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="issubmit != null">
+                issubmit = #{issubmit,jdbcType=CHAR},
+            </if>
+            <if test="submitdate != null">
+                submitdate = #{submitdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalscore != null">
+                totalscore = #{totalscore,jdbcType=INTEGER},
+            </if>
+        </set>
+        where answerid = #{answerid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Answer">
     update answer
     set answerspaperid = #{answerspaperid,jdbcType=INTEGER},
       namePaper = #{namepaper,jdbcType=VARCHAR},

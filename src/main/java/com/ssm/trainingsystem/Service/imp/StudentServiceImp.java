@@ -6,6 +6,8 @@ import com.ssm.trainingsystem.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImp implements StudentService {
 
@@ -36,9 +38,36 @@ public class StudentServiceImp implements StudentService {
                 temp= -1;
             }
         }
-
         return temp;
+    }
 
+    @Override
+    public int Update(Student student) {
+        int temp=0;
+        if (student.getStudentid()!=0){
+            temp=-1;  //没有主键不能进行修改
+        }else{
+            Student student1=new Student();
+            student1.setSno(student.getSno());
+            student1.setStudentid(student.getStudentid());
+            int count=studentMapper.selectStudentSon(student1);
+            if (count==0){
+                temp=studentMapper.updateByPrimaryKeySelective(student);
+            }else{
+                temp=-1;
+            }
+        }
+        return temp;
+    }
 
+    @Override
+    public List<Student> getAll(Student student) {
+        List<Student> temp=studentMapper.selectAll(student);
+        return null;
+    }
+
+    @Override
+    public Student getOne(int studentid) {
+        return null;
     }
 }

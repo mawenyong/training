@@ -1,78 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ssm.trainingsystem.Dao.LoginpersonMapper" >
-  <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Loginperson" >
-    <id column="loginpersonid" property="loginpersonid" jdbcType="INTEGER" />
-    <result column="loginname" property="loginname" jdbcType="VARCHAR" />
-    <result column="loginpwd" property="loginpwd" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ssm.trainingsystem.Dao.LoginpersonMapper">
+    <resultMap id="BaseResultMap" type="com.ssm.trainingsystem.Model.Loginperson">
+        <id column="loginpersonid" property="loginpersonid" jdbcType="INTEGER"/>
+        <result column="loginname" property="loginname" jdbcType="VARCHAR"/>
+        <result column="loginpwd" property="loginpwd" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     loginpersonid, loginname, loginpwd, createtime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from loginperson
-    where loginpersonid = #{loginpersonid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from loginperson
+        where loginpersonid = #{loginpersonid,jdbcType=INTEGER}
+    </select>
+    <select id="isLog" resultType="com.ssm.trainingsystem.Model.Loginperson" parameterType="com.ssm.trainingsystem.Model.Loginperson">
+      SELECT <include refid="Base_Column_List"/> from loginperson WHERE loginname=#{loginname,jdbcType=VARCHAR} and loginpwd=#{loginpwd,jdbcType=VARCHAR}
+    </select>
+    <select id="selectLoginPersonName" resultType="java.lang.String">
+      SELECT COUNT (loginname) FROM loginperson WHERE loginname=#{loginname,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultType="com.ssm.trainingsystem.Model.Loginperson" parameterType="com.ssm.trainingsystem.Model.Loginperson">
+        select <include refid="Base_Column_List"/> from loginperson WHERE 1=1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from loginperson
     where loginpersonid = #{loginpersonid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Loginperson" >
+    <insert id="insert" parameterType="com.ssm.trainingsystem.Model.Loginperson">
     insert into loginperson (loginpersonid, loginname, loginpwd, 
       createtime)
     values (#{loginpersonid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{loginpwd,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Loginperson" >
-    insert into loginperson
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="loginpersonid != null" >
-        loginpersonid,
-      </if>
-      <if test="loginname != null" >
-        loginname,
-      </if>
-      <if test="loginpwd != null" >
-        loginpwd,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="loginpersonid != null" >
-        #{loginpersonid,jdbcType=INTEGER},
-      </if>
-      <if test="loginname != null" >
-        #{loginname,jdbcType=VARCHAR},
-      </if>
-      <if test="loginpwd != null" >
-        #{loginpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Loginperson" >
-    update loginperson
-    <set >
-      <if test="loginname != null" >
-        loginname = #{loginname,jdbcType=VARCHAR},
-      </if>
-      <if test="loginpwd != null" >
-        loginpwd = #{loginpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where loginpersonid = #{loginpersonid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Loginperson" >
+    <insert id="insertSelective" parameterType="com.ssm.trainingsystem.Model.Loginperson">
+        insert into loginperson
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginpersonid != null">
+                loginpersonid,
+            </if>
+            <if test="loginname != null">
+                loginname,
+            </if>
+            <if test="loginpwd != null">
+                loginpwd,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="loginpersonid != null">
+                #{loginpersonid,jdbcType=INTEGER},
+            </if>
+            <if test="loginname != null">
+                #{loginname,jdbcType=VARCHAR},
+            </if>
+            <if test="loginpwd != null">
+                #{loginpwd,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.trainingsystem.Model.Loginperson">
+        update loginperson
+        <set>
+            <if test="loginname != null">
+                loginname = #{loginname,jdbcType=VARCHAR},
+            </if>
+            <if test="loginpwd != null">
+                loginpwd = #{loginpwd,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where loginpersonid = #{loginpersonid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.trainingsystem.Model.Loginperson">
     update loginperson
     set loginname = #{loginname,jdbcType=VARCHAR},
       loginpwd = #{loginpwd,jdbcType=VARCHAR},
